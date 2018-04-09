@@ -17,7 +17,7 @@ public class LigneCommande implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//DECLARATION DES ATTRIBUTS
-	
+	//dhodheodh
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
