@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>eShopProject</display-name>
+
+<!-- Etape 0 : déclarer un listener pour charger le context Spring IoC -->
+		<listener>
+			<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		</listener>
+	
+	<!-- Etape 1 : localisation du fichier de configuration du context Spring IoC -->
+		<context-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/application-context.xml</param-value>
+		</context-param>
+	
+	<!-- Etape 2 : déclaration de la servlet unique de JSF-->
+	  <servlet>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	  </servlet>
+  
+  <!-- Etape 3 : mapping de la servlet unique de JSF -->
+	  <servlet-mapping>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <url-pattern>*.xhtml</url-pattern>
+	  </servlet-mapping>
+	  
+  <!-- déclarer la page d'accueil -->
+	  <welcome-file-list>
+	  	<welcome-file>accueil.xhtml</welcome-file>
+	  </welcome-file-list>
+  
+  <!-- spécifier la phase du projet -->
+	  <context-param>
+		  <param-name>javax.faces.PROJECT_STAGE</param-name>
+		  <param-value>Development</param-value>
+	  </context-param>
+
+</web-app>
