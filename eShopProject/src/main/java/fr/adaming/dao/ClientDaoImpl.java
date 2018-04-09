@@ -55,35 +55,43 @@ public class ClientDaoImpl implements IClientDao{
 		q.setParameter("pId", c.getIdClient());
 		
 		// envoyer la requête
-		return 0;
+		return q.executeUpdate();
 	}
 
 	@Override
 	public int deleteClient(Client c) {
 		// requête HQL
+		String req = "DELETE FROM Client c WHERE c.idClient=:pId";
 		
 		// créer session
+		s = sf.getCurrentSession();
 		
 		// création d'un objet de type Query
+		q = s.createQuery(req);
 		
 		// passage des paramètres
+		q.setParameter("pId", c.getIdClient());
 		
 		// envoyer la requête
-		return 0;
+		return q.executeUpdate();
 	}
 
 	@Override
 	public Client getClientById(Client c) {
 		// requête HQL
+		String req = "FROM Client c WHERE c.idClient=:pId";
 		
 		// créer session
+		s = sf.getCurrentSession();
 		
 		// création d'un objet de type Query
+		q = s.createQuery(req);
 		
 		// passage des paramètres
+		q.setParameter("pId", c.getIdClient());
 		
 		// envoyer la requête
-		return null;
+		return (Client) q.uniqueResult();
 	}
 
 }
