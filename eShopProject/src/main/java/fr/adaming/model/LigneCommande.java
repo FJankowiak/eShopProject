@@ -101,5 +101,14 @@ public class LigneCommande implements Serializable {
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
+	
+
+	public Commande getCommande() {
+		return commande;
+	}
+
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
 
 }

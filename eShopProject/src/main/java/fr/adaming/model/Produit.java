@@ -89,8 +89,18 @@ public class Produit implements Serializable{
 
 		//GETTERS ET SETTERS
 		
+		
+		
 		public String getImage() {
 			return image;
+		}
+
+		public Categorie getCat() {
+			return cat;
+		}
+
+		public void setCat(Categorie cat) {
+			this.cat = cat;
 		}
 
 		public void setImage(String image) {
