@@ -33,7 +33,7 @@ public class Produit implements Serializable{
 	private String designation;
 	private String description;
 	private double prix;
-	private int quantite;
+	private int quantite; 
 	
 	@Column(columnDefinition="TINYINT(1)")
 	private boolean selectionne;
@@ -52,8 +52,6 @@ public class Produit implements Serializable{
 	
 	//CONSTRUCTEURS VIDE
 	
-
-
 		public Produit() {
 			super();
 		}
