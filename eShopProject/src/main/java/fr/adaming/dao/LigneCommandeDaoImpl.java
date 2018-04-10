@@ -22,29 +22,55 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	public void setSf(SessionFactory sf) {
 		this.sf = sf;
 	}
+	
 
 	@Override
 	public int ajouterLC(LigneCommande lc) {
-		// TODO Auto-generated method stub
+		
+		s=sf.getCurrentSession();
+		
+		s.save(lc);
+		
 		return 0;
 	}
 
-	@Override
-	public int supprimerLC(LigneCommande lc) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int modifierLC(LigneCommande lc) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		// Requete HQL
+		String req="UPDATE LigneCommande lc SET lc.quantite=:pQuantite,lc.prix=:pPrix, lc.produit=:pProd, lc.commande=:pCom WHERE lc.id_ligne=:pIdlc";
+		
+		// Création session
+		s=sf.getCurrentSession();
+		
+		// Creation query
+		Query query=s.createQuery(req);
+		
+		// Passage des params
+		query.setParameter("pQuantite", lc.getQuantite());
+		query.setParameter("pPrix", lc.getPrix());
+		query.setParameter("pProd", lc.getProduit());
+		query.setParameter("pCom", lc.getCommande());
+		query.setParameter("pIdcl", lc.getId_ligne());
+		
+		// Exploitation des résultats
+		return query.executeUpdate();
 	}
 
 	@Override
 	public List<LigneCommande> getLigneCommande() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// Requete HQL
+		String req="FROM LigneCommande lc";
+				
+		// Création session
+		s=sf.getCurrentSession();
+		
+		// Creation query
+		Query query=s.createQuery(req);
+		
+		return query.list();
 	}
 
 	@Override
@@ -60,17 +86,22 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	}
 
 	@Override
-	public void viderLC() {
+	public void viderLC(LigneCommande lc) {
 
 		
-		//REQUETE HQL
-		 String req7="DELETE FROM LigneCommande";
+		//Requête HQL
+		 String req7="DELETE FROM LigneCommande lc WHERE lc.id_ligneCom=:pId";
 		
-		// OUVRIR UNE SESSION
+		// Ouvrir une session
 		s = sf.getCurrentSession();
 
+		// Création du query
 		Query query = s.createQuery(req7);
+		
+		// Passage des params
+		query.setParameter("pId", lc.getId_ligne());
 
+		// Exploitation des résultats
 		query.executeUpdate();
 
 	}

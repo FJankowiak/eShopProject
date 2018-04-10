@@ -1,10 +1,10 @@
-package fr.adaming.dao;
+package fr.adaming.service;
 
 import java.util.List;
 
 import fr.adaming.model.LigneCommande;
 
-public interface ILigneCommandeDao {
+public interface ILigneCommandeService {
 	
 	public int ajouterLC(LigneCommande lc);	
 	

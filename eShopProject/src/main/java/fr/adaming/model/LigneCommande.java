@@ -16,9 +16,6 @@ public class LigneCommande implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//DECLARATION DES ATTRIBUTS
-	//dhodheodh
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_ligneCom")
@@ -35,6 +32,8 @@ public class LigneCommande implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "co_id", referencedColumnName = "id_co")
 	private Commande commande;
+	
+	private Panier panier;
 	
 
 	// Declaration des constructeurs
