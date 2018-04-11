@@ -38,7 +38,8 @@ public class ClientDaoImpl implements IClientDao{
 	@Override
 	public int updateClient(Client c) {
 		// requête HQL
-		String req = "UPDATE Client c SET c.nomClient=:pNom, c.adresse=:pAdresse, c.email=:pEmail, c.tel=:pTel, c.listeCommandes=:pListeCommandes WHERE c.idClient=:pId";
+		String req = "UPDATE Client c SET c.nomClient=:pNom, c.adresse=:pAdresse, c.email=:pEmail, c.tel=:pTel, c.listeCommandes=:pListeCommandes "
+				+ "WHERE c.idClient=:pId";
 		
 		// créer session
 		s = sf.getCurrentSession();
