@@ -126,6 +126,29 @@
 			    <artifactId>mysql-connector-java</artifactId>
 			    <version>5.1.38</version>
 			</dependency>
+			
+	<!-- Bibliothèques itext (PDF) -->
+	<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>itextpdf</artifactId>
+    <version>5.4.0</version>
+	</dependency>
+	
+	<!-- Bibliothèques mail-->
+	<!-- mail -->
+<dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.4.7</version>
+</dependency>
+	
+	<!-- Bibliothèques activation-->
+	<!-- https://mvnrepository.com/artifact/javax.activation/javax.activation-api -->
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>javax.activation-api</artifactId>
+    <version>1.2.0</version>
+</dependency>
 	
 </dependencies>
   

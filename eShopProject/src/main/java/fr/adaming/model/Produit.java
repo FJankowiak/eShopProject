@@ -44,6 +44,8 @@ public class Produit implements Serializable{
 	@Transient
 	private String image;
 	
+	private int quantSouhaite;
+	
 	
 	//TRANSFORMATION DE L'ASSOCIATION EN UML EN JAVA
 	

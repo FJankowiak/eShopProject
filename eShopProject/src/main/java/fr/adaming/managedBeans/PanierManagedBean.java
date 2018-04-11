@@ -1,7 +1,13 @@
 
 package fr.adaming.managedBeans;
 
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
@@ -15,18 +21,30 @@ public class PanierManagedBean {
 	// Attributs
 	private Panier panier;
 	private Produit produit;
-	private LigneCommande lignesCmd;
+	private LigneCommande ligneCmd;
 	HttpSession maSession;
 	
+	// Transformation de l'association UML en JAVA
+	@Autowired
 	private ILigneCommandeService ligneService;
-	
+	@Autowired
 	private IProduitService produitService;
-	
+	@Autowired
 	private ICommandeService commandeService;
 
 	// Constructeur vide
 	public PanierManagedBean() {
 		super();
+		this.produit = new Produit();
+		this.ligneCmd = new LigneCommande();
+		this.panier = new Panier();
+	}
+	
+	@PostConstruct
+	public void init() {
+
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
 	}
 
 	// Getters et setters
@@ -47,11 +65,11 @@ public class PanierManagedBean {
 	}
 
 	public LigneCommande getLignesCmd() {
-		return lignesCmd;
+		return ligneCmd;
 	}
 
 	public void setLignesCmd(LigneCommande lignesCmd) {
-		this.lignesCmd = lignesCmd;
+		this.ligneCmd = lignesCmd;
 	}
 
 	public ILigneCommandeService getLigneService() {
@@ -80,6 +98,18 @@ public class PanierManagedBean {
 	
 	// Methodes métier
 	public String ajouterLigneCommande(){
+		
+		boolean verif = true;
+		Produit pOut = produitService.rechercherProduitById(this.produit);
+		
+		// Inclusion de la liste de lignes de commande dans le panier
+		panier.setListeLignesCommande(new ArrayList<>());
+		
+		//Récupération de la quantité de produit souhaitée : ajouté à ligne de commande
+		this.ligneCmd.setQuantite(this.ligneCmd.getProduit().getQuantite());
+		
+		// Récupération du prix : ajouté à ligne de commande
+		this.ligneCmd.setPrix(this.ligneCmd.getProduit().getPrix() * this.ligneCmd.getQuantite());
 		
 		return null;
 	}
