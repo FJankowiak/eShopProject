@@ -170,5 +170,21 @@ public class Produit implements Serializable{
 			this.photo = photo;
 		}
 
-	
+		public int getQuantSouhaite() {
+			return quantSouhaite;
+		}
+
+		public void setQuantSouhaite(int quantSouhaite) {
+			this.quantSouhaite = quantSouhaite;
+		}
+
+		public List<LigneCommande> getListeLigneCmd() {
+			return ListeLigneCmd;
+		}
+
+		public void setListeLigneCmd(List<LigneCommande> listeLigneCmd) {
+			ListeLigneCmd = listeLigneCmd;
+		}
+
+		
 }
