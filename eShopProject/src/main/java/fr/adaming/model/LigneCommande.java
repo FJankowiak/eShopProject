@@ -31,7 +31,7 @@ public class LigneCommande implements Serializable {
 	
 	// Transformer l'association UML en java
 	@ManyToOne
-	@JoinColumn(name = "p_id", referencedColumnName = "id_p")
+	@JoinColumn(name = "prod_id", referencedColumnName = "id_prod")
 	private Produit produit;
 	
 	@ManyToOne

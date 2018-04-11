@@ -21,7 +21,7 @@ public class Categorie implements Serializable {
 	// Attributs
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_categorie")
+	@Column(name="id_cat")
 	private Long idCategorie;
 	private String nomCategorie;
 	@Lob

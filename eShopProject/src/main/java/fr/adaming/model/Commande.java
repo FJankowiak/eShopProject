@@ -20,7 +20,7 @@ public class Commande {
 	// déclaration des attributs
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_commande")
+	@Column(name="id_co")
 	private Long idCommande;
 	private Date dateCommande;
 	

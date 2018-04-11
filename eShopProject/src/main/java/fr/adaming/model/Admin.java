@@ -28,11 +28,7 @@ public class Admin implements Serializable {
 	private String mail;
 	private String mdp;
 	
-	
-	
-	
-	
-	
+
 	// Declaration des constructeurs
 	public Admin() {
 		super();

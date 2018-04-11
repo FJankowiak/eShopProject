@@ -30,7 +30,7 @@ public class Produit implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_produit")
+	@Column(name="id_prod")
 	private Long id;
 	private String designation;
 	private String description;
@@ -48,8 +48,8 @@ public class Produit implements Serializable{
 	//TRANSFORMATION DE L'ASSOCIATION EN UML EN JAVA
 	
 	@ManyToOne
-	@JoinColumn(name="categorie_id", referencedColumnName="id_categorie")
-	private Categorie cat;
+	@JoinColumn(name="cat_id", referencedColumnName="id_cat")
+	private Categorie categorie;
 	
 	@OneToMany (mappedBy="produit")
 	private List<LigneCommande> ListeLigneCmd;
@@ -99,12 +99,12 @@ public class Produit implements Serializable{
 			return image;
 		}
 
-		public Categorie getCat() {
-			return cat;
+		public Categorie getCategorie() {
+			return categorie;
 		}
 
-		public void setCat(Categorie cat) {
-			this.cat = cat;
+		public void setCategorie(Categorie categorie) {
+			this.categorie = categorie;
 		}
 
 		public void setImage(String image) {
