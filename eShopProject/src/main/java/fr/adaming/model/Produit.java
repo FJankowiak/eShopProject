@@ -44,6 +44,7 @@ public class Produit implements Serializable{
 	@Transient
 	private String image;
 	
+	@Transient
 	private int quantSouhaite;
 	
 	
