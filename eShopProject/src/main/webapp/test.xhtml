@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<TITLE>test</TITLE>
+</h:head>
+<h:body>
+<p:breadCrumb>
+    <p:menuitem value="Afficher toutes les catégories" url="test.xhtml" />
+    <p:menuitem value="Afficher les produits par catégorie" url="#" />
+    <p:menuitem value="Ajouter catégorie" url="#" />
+    <p:menuitem value="Modifier catégorie" url="#" />
+    <p:menuitem value="Supprimer catégorie" url="#" />
+    <p:menuitem value="Rechercher catégorie" url="#" />
+    <p:menuitem value="Ajouter produit" url="#" />
+    <p:menuitem value="Modifier produit" url="#" />
+    <p:menuitem value="Supprimer produit" url="#" />
+    <p:menuitem value="Rechercher produit" url="#" />
+    <p:menuitem value="Rechercher produit par mot clé" url="#" />
+</p:breadCrumb>
+	<br />
+	<hr/>
+<h1>Consulter catégories</h1>
+	<br />
+<h:form>
+<h:commandButton value="Afficher les catégories" action="#{categorieMB.afficherToutCategorie}" update="allCategories"/>
+	<p:dataTable var="c" value="#{categorieMB.listeCategories}" id="allCategories">
+	    <p:column headerText="Id">
+	        <h:outputText value="#{c.idCategorie}" />
+	    </p:column>
+	 
+	    <p:column headerText="nom">
+	        <h:outputText value="#{c.nomCategorie}" />
+	    </p:column>
+	 
+	    <p:column headerText="image">
+	        <h:outputText value="#{c.image}" />
+	    </p:column>
+
+	    <p:column headerText="description">
+	        <h:outputText value="#{c.description}" />
+	    </p:column>
+	</p:dataTable>	
+</h:form>
+	<br />
+	<hr/>
+<h1>Consulter produit par catégorie</h1>
+<h:form>
+		<h:panelGrid columns="2">
+		Catégorie : <h:inputText value="#{produitMB.cat.idCategorie}" />
+			<h:commandButton value="Consulter les produits de la catégorie"
+				action="#{produitMB.rechercherByCategorie}" />
+		</h:panelGrid>
+	</h:form>
+	<br />
+	<h:form>
+		<p:dataTable var="produit" value="#{produitMB.listeproduits}"
+			id="allProduitsByCategory">
+			<p:column headerText="image">
+				<h:outputText value="#{produit.image}" />
+			</p:column>
+			
+			<p:column headerText="Id">
+				<h:outputText value="#{produit.id}" />
+			</p:column>
+
+			<p:column headerText="designation">
+				<h:outputText value="#{produit.designation}" />
+			</p:column>
+
+			<p:column headerText="description">
+				<h:outputText value="#{produit.description}" />
+			</p:column>
+					
+			<p:column headerText="prix">
+				<h:outputText value="#{produit.prix}" />
+			</p:column>
+
+			<p:column headerText="quantite">
+				<h:outputText value="#{produit.quantite}" />
+			</p:column>
+
+			<p:column headerText="categorie">
+				<h:outputText value="#{produit.categorie.idCategorie}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	
+<br/>
+<hr/>
+<h1>Ajouter catégorie</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			Nom: <h:inputText value="#{categorieMB.categorie.nomCategorie}" />
+			Description: <h:inputText
+				value="#{categorieMB.categorie.description}" />
+			<h:commandButton value="Ajouter Catégorie"
+				action="#{categorieMB.ajouterCategorie}" />
+		</h:panelGrid>
+	</h:form>
+	<h:messages style="color:red" />
+<br/>
+<hr/>
+
+<h1>Modifier catégorie</h1>
+<h:form>
+		<h:panelGrid columns="2">
+			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}" />
+			Nom: <h:inputText value="#{categorieMB.categorie.nomCategorie}" />
+			Description: <h:inputText
+				value="#{categorieMB.categorie.description}" />
+			<h:commandButton value="Modifier catégorie"
+				action="#{categorieMB.modifierCategorie}" />
+		</h:panelGrid>
+	</h:form>
+
+<br/>
+<hr/>
+<h1>Supprimer catégorie</h1>	
+	<h:form>
+		<h:panelGrid columns="2">
+			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}" />
+			<h:commandButton value="Supprimer catégorie"
+				action="#{categorieMB.supprimerCategorie}" />
+		</h:panelGrid>
+	</h:form>
+	
+	<br/>
+<hr/>
+<h1>Rechercher catégorie</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}" />
+			<h:commandButton value="Consulter catégorie"
+				action="#{categorieMB.rechercherCategorie}" update="getCat" />
+		</h:panelGrid>
+	</h:form>
+	<p:dataTable var="c" value="#{categorieMB.categorie}"
+		id="getCat">
+		<p:column headerText="Id">
+			<h:outputText value="#{c.idCategorie}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{c.nomCategorie}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{c.description}" />
+		</p:column>
+	</p:dataTable>
+<hr/>
+<h1>Afficher tous les produits</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:commandButton value="Consulter produits"
+				action="#{produitMB.afficherProduits}" />
+		</h:panelGrid>
+	</h:form>
+	<br />
+	<h:form>
+		<p:dataTable var="produit" value="#{produitMB.listeproduits}"
+			id="allProduitsByCategory">
+			<p:column headerText="image">
+				<h:outputText value="#{produit.image}" />
+			</p:column>
+			
+			<p:column headerText="Id">
+				<h:outputText value="#{produit.id}" />
+			</p:column>
+
+			<p:column headerText="designation">
+				<h:outputText value="#{produit.designation}" />
+			</p:column>
+
+			<p:column headerText="description">
+				<h:outputText value="#{produit.description}" />
+			</p:column>
+					
+			<p:column headerText="prix">
+				<h:outputText value="#{produit.prix}" />
+			</p:column>
+
+			<p:column headerText="quantite">
+				<h:outputText value="#{produit.quantite}" />
+			</p:column>
+
+			<p:column headerText="categorie">
+				<h:outputText value="#{produit.categorie.idCategorie}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+<h1>Ajouter produit</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			Nom: <h:inputText value="#{categorieMB.categorie.nomCategorie}" />
+			Description: <h:inputText
+				value="#{categorieMB.categorie.description}" />
+			<h:commandButton value="Ajouter Catégorie"
+				action="#{categorieMB.ajouterCategorie}" />
+		</h:panelGrid>
+	</h:form>
+<h:form>
+		<h:panelGrid columns="2">
+			designation : <h:inputText value="#{produitMB.produit.designation}" />
+			description : <h:inputText value="#{produitMB.produit.description}" />
+			prix : <h:inputText value="#{produitMB.produit.prix}" />
+			quantité : <h:inputText value="#{produitMB.produit.quantite}" />
+			catégorie : <h:inputText value="#{produitMB.cat.idCategorie}" />
+			<h:commandButton value="Ajouter" action="#{produitMB.ajouterProd}" />
+		</h:panelGrid>
+</h:form>
+	<br />
+<h1>Supprimer produit</h1>
+<h:form>
+		<h:panelGrid columns="2">
+		id : <h:inputText value="#{produitMB.produit.id}" />
+			<h:commandButton value="Supprimer" action="#{produitMB.supprimerProd}" />
+		</h:panelGrid>
+	</h:form>
+	<br />
+<h1>Modifier produit</h1>
+<h:form>
+		<h:panelGrid columns="2">
+		id : <h:inputText value="#{produitMB.produit.id}">
+				<p:ajax event="keyup" update="@all"
+					listener="#{produitMB.getByIdEvent}" />
+			</h:inputText>
+		designation : <h:inputText value="#{produitMB.produit.designation}" />
+		description : <h:inputText value="#{produitMB.produit.description}" />
+		prix : <h:inputText value="#{produitMB.produit.prix}" />
+		quantité : <h:inputText value="#{produitMB.produit.quantite}" />
+		catégorie : <h:inputText value="#{produitMB.cat.idCategorie}" />
+			<h:commandButton value="Modifier" action="#{produitMB.modifierProd}" />
+		</h:panelGrid>
+	</h:form>
+
+	<br />
+<h1>Rechercher produit</h1>
+<h:form>
+		<h:panelGrid columns="2">
+		Id produit : <h:inputText value="#{produitMB.produit.id}" />
+			<h:commandButton value="Consulter produits"
+				action="#{produitMB.rechercherProdByid}" />
+		</h:panelGrid>
+	</h:form>
+	<br />
+	<h:form>
+		<p:dataTable var="produit" value="#{produitMB.produit}">
+			<p:column headerText="Id">
+				<h:outputText value="#{produit.id}" />
+			</p:column>
+
+			<p:column headerText="designation">
+				<h:outputText value="#{produit.designation}" />
+			</p:column>
+
+			<p:column headerText="description">
+				<h:outputText value="#{produit.description}" />
+			</p:column>
+
+			<p:column headerText="quantite">
+				<h:outputText value="#{produit.quantite}" />
+			</p:column>
+
+			<p:column headerText="catégorie">
+				<h:outputText value="#{produit.categorie.idCategorie}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	
+</h:body>
+</html>
