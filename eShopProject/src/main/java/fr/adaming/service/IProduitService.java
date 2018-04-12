@@ -2,6 +2,7 @@ package fr.adaming.service;
 
 import java.util.List;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 public interface IProduitService {
@@ -28,5 +29,8 @@ public interface IProduitService {
 
 		// RECHERCHER PRODUIT BY ID
 		public Produit rechercherProduitById(Produit prod);
+		
+		// consulter les produits d'une catégorie
+		public List<Produit> getAllProduits(Categorie categorie);
 
 }

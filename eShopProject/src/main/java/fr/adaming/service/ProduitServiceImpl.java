@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IProduitDao;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Service("prodService")
@@ -41,9 +42,7 @@ public class ProduitServiceImpl implements IProduitService {
 		
 		return produitDao.deleteProduit(prod);
 	}
-
 	
-
 	@Override
 	public Produit rechercherProduitById(Produit prod) {
 		
@@ -54,6 +53,11 @@ public class ProduitServiceImpl implements IProduitService {
 	public Produit rechercherProduit(Long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Produit> getAllProduits(Categorie categorie) {
+		return produitDao.getAllProduits(categorie);
 	}
 
 }

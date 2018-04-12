@@ -1,5 +1,6 @@
 package fr.adaming.dao;
 
+//import org.apache.commons.codec.binary.Base64;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 
@@ -102,8 +104,6 @@ public class ProduitDaoImpl implements IProduitDao {
 		return query.executeUpdate();
 	}
 
-
-
 	@Override
 	public Produit rechercherProduitById(Produit prod) {
 		//REQUETE HQL
@@ -123,14 +123,27 @@ public class ProduitDaoImpl implements IProduitDao {
 		return (Produit) query.uniqueResult();
 	}
 	
-	
-	//ATTENTION CETTE METHODE EST UTILE A LA REALISATION DU PANIER 
-	//RECHERCHER UN PRODUIT CETTE METHODE EST PROVISOIRE *******
-	
 	@Override
-	public Produit rechercherProduit(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Produit> getAllProduits(Categorie cat) {
+		// requête HQL pour récupérer la liste de produits par catégorie
+		String r = "FROM Produit p WHERE p.categorie.idCategorie=:pIdCategorie";
+				
+		// création d'un objet de type Query pour envoyer la requête HQL
+		s=sf.getCurrentSession();
+		Query q = s.createQuery(r);
+		
+		// passage des paramètres
+		q.setParameter("pIdCategorie", cat.getIdCategorie());
+		
+		// Récupération du résultat
+		List<Produit> listeOut=q.list();
+		
+//		// Chargement des images
+//		for(Produit prod: listeOut){
+//			prod.setImage("data:image/png;base64,"+Base64.encodeBase64String(prod.getPhoto()));
+//		}
+		// retourner le résultat
+		return listeOut;
 	}
 
 }

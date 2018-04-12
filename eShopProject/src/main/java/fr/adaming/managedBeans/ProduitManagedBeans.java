@@ -16,6 +16,7 @@ import org.primefaces.model.UploadedFile;
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "produitMB")
@@ -36,6 +37,17 @@ public class ProduitManagedBeans implements Serializable {
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
+	
+	@ManagedProperty("#{categorieService}")
+	ICategorieService catService;
+
+	public void setCatService(ICategorieService catService) {
+		this.catService = catService;
+	}
+
+	public void setMaSession(HttpSession maSession) {
+		this.maSession = maSession;
+	}
 
 	// ATTRIBUTS
 
@@ -43,7 +55,7 @@ public class ProduitManagedBeans implements Serializable {
 	private Admin admin;
 	private Categorie cat;
 	HttpSession maSession;
-	List<Produit> listeprod;
+	private List<Produit> listeproduits;
 	private boolean indice;
 
 	private UploadedFile uf;
@@ -59,6 +71,7 @@ public class ProduitManagedBeans implements Serializable {
 	// CONSTRUCTEUR VIDE
 	public ProduitManagedBeans() {
 		this.produit = new Produit();
+		this.cat = new Categorie();
 	}
 
 	public Produit getProduit() {
@@ -85,12 +98,12 @@ public class ProduitManagedBeans implements Serializable {
 		this.cat = cat;
 	}
 
-	public List<Produit> getListeprod() {
-		return listeprod;
+	public List<Produit> getListeproduits() {
+		return listeproduits;
 	}
 
-	public void setListeprod(List<Produit> listeprod) {
-		this.listeprod = listeprod;
+	public void setListeproduits(List<Produit> listeproduits) {
+		this.listeproduits = listeproduits;
 	}
 
 	public boolean isIndice() {
@@ -122,11 +135,25 @@ public class ProduitManagedBeans implements Serializable {
 	}
 
 	// METHODES
+	
+	// méthode rechercher produits par catégorie
+	
+	public String rechercherByCategorie() {
+		this.cat = catService.getCategorie(cat);
+		listeproduits = produitService.getAllProduits(cat);
+		if (listeproduits != null) {
+			return "test";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Une erreur est survenue, produit(s) introuvable(s)."));
+			return "";
+		}
+	}
 
 	// AJOUTER UN PRODUIT
 
 	public String ajouterProd() {
-
+		
 		// APPEL DE LA METHODE AJOUTER
 
 		produit.setPhoto(this.uf.getContents());
@@ -139,7 +166,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			List<Produit> listep = produitService.getlisteProduit();
 
-			this.listeprod = listep;
+			this.listeproduits = listep;
 
 			return "";
 
@@ -162,7 +189,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			List<Produit> listep = produitService.getlisteProduit();
 
-			this.listeprod = listep;
+			this.listeproduits = listep;
 
 			return "";
 		} else {
@@ -183,7 +210,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			List<Produit> listep = produitService.getlisteProduit();
 
-			this.listeprod = listep;
+			this.listeproduits = listep;
 
 			return "";
 		} else {
