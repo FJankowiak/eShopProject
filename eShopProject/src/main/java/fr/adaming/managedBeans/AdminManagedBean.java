@@ -10,8 +10,10 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import fr.adaming.model.Admin;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IAdminService;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "adminMB")
@@ -31,7 +33,8 @@ public class AdminManagedBean implements Serializable {
 	@ManagedProperty(value = "#{prodService}")
 	private IProduitService produitService;
 
-	// PLACER ICI********* LA TRANS DE CATEGORIE*******
+	@ManagedProperty(value = "#{categorieService}")
+	private ICategorieService catService;
 
 	// SETTER POUR L'INJECTION DE DEPENDANCE
 
@@ -43,10 +46,14 @@ public class AdminManagedBean implements Serializable {
 		this.produitService = produitService;
 	}
 
+	public void setCatService(ICategorieService catService) {
+		this.catService = catService;
+	}
 	// ATTRIBUTS TRANSFERES A LA PAGE
 
 	private Admin admin;
 	private List<Produit> listeProduit;
+	private List<Categorie> listeCategorie;
 
 	// CONSTRUCTEUR VIDE
 
@@ -62,6 +69,14 @@ public class AdminManagedBean implements Serializable {
 
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
+	}
+
+	public void setListeCategorie(List<Categorie> listeCategorie) {
+		this.listeCategorie = listeCategorie;
+	}
+
+	public List<Categorie> getListeCategorie() {
+		return listeCategorie;
 	}
 
 	public List<Produit> getListeProduit() {
@@ -84,22 +99,25 @@ public class AdminManagedBean implements Serializable {
 
 			// RECUPERER LA LISTE
 
-			// this.listeProduit=produitService.getlisteProduit(adminOut);
-			
-			//AFFICHER L'ADMIN DANS LA SESSION
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("etudiantListe", this.listeProduit);
-			
-			//AJOUTER LA LISTE DANS LA SESSION
+			this.listeProduit = produitService.getlisteProduit();
+			this.listeCategorie = catService.getAllCategorie();
+			// AFFICHER L'ADMIN DANS LA SESSION
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", adminOut);
-			
-			this.admin=adminOut;
-			
-			return "";
+
+			// AJOUTER LA LISTE DANS LA SESSION
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitListe",
+					this.listeProduit);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categorieListe",
+					this.listeCategorie);
+
+			this.admin = adminOut;
+
+			return "tabAdmin";
 
 		} else {
-			
+
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("authentification échouée"));
-			return "";
+			return "accueil";
 		}
 
 	}

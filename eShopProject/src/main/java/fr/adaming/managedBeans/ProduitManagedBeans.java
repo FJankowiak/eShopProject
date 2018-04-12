@@ -57,7 +57,7 @@ public class ProduitManagedBeans implements Serializable {
 
 	private UploadedFile uf;
 
-	private Long id_p;
+	
 
 	@PostConstruct
 	public void init() {
@@ -119,13 +119,6 @@ public class ProduitManagedBeans implements Serializable {
 		this.uf = uf;
 	}
 
-	public Long getId_p() {
-		return id_p;
-	}
-
-	public void setId_p(Long id_p) {
-		this.id_p = id_p;
-	}
 
 	public IProduitService getProduitService() {
 		return produitService;
@@ -178,7 +171,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			this.listeproduits = listep;
 
-			return "test";
+			return "tabAdmin";
 
 		} else {
 
@@ -201,7 +194,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			this.listeproduits = listep;
 
-			return "test";
+			return "tabAdmin";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
