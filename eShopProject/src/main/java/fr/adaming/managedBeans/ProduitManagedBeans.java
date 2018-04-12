@@ -168,7 +168,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			this.listeproduits = listep;
 
-			return "";
+			return "test";
 
 		} else {
 
@@ -191,7 +191,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			this.listeproduits = listep;
 
-			return "";
+			return "test";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
@@ -212,7 +212,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			this.listeproduits = listep;
 
-			return "";
+			return "test";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
 
@@ -224,18 +224,19 @@ public class ProduitManagedBeans implements Serializable {
 	
 	//RECHERCHER UN PRODUIT PAR SON ID
 	
-	public void rechercherProdByid() {
+	public String rechercherProdByid() {
 
 		this.produit = produitService.rechercherProduitById(produit);
 		if (produit != null) {
 
 			this.indice = true;
 
+			return "test";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
 			this.indice = false;
-
+			return "";
 		}
 
 	}
