@@ -23,9 +23,6 @@ import fr.adaming.service.IProduitService;
 @RequestScoped
 public class ProduitManagedBeans implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	// TRANFORMATION ASSOCIATION UML EN JAVA
@@ -150,17 +147,30 @@ public class ProduitManagedBeans implements Serializable {
 		}
 	}
 
+	// méthode afficher la liste de tous les produits
+	
+		public String afficherProduits() {
+			listeproduits = produitService.getlisteProduit();
+			if (listeproduits != null) {
+				return "test";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Une erreur est survenue, liste des produits introuvable."));
+				return "";
+			}
+		}
+	
 	// AJOUTER UN PRODUIT
 
 	public String ajouterProd() {
 		
 		// APPEL DE LA METHODE AJOUTER
 
-		produit.setPhoto(this.uf.getContents());
-
-		Produit prodOut = produitService.addProduit(produit);
+		Produit prodOut = produitService.addProduit(produit, cat);
 
 		if (prodOut.getId() != 0) {
+			
+			produit.setPhoto(this.uf.getContents());
 
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
 
@@ -183,7 +193,7 @@ public class ProduitManagedBeans implements Serializable {
 	
 	public String modifierProd() {
 
-		int verif = produitService.updateProduit(produit);
+		int verif = produitService.updateProduit(produit, cat);
 
 		if (verif != 0) {
 
@@ -198,6 +208,10 @@ public class ProduitManagedBeans implements Serializable {
 
 			return "";
 		}
+	}
+	
+	public void getByIdEvent() {
+		this.produit = produitService.rechercherProduitById(produit);
 	}
 	
 	//SUPPRIMER UN PRODUIT 

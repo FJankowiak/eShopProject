@@ -79,7 +79,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		query.setParameter("pQuantite",prod.getQuantite());
 		query.setParameter("pPrix", prod.getPrix());
 		query.setParameter("pPhoto", prod.getPhoto());
-		query.setParameter("pProdId", prod.getId());
+		query.setParameter("pId", prod.getId());
 		
 		return query.executeUpdate();
 	}
@@ -87,7 +87,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	@Override
 	public int deleteProduit(Produit prod) {
 		//REQUETE HQL
-		String req3="DELETE FROM Produit prod WHERE prod.id=pId ";
+		String req3="DELETE FROM Produit prod WHERE prod.id=:pId ";
 		
 		//OUVRIR UNE SESSION
 		

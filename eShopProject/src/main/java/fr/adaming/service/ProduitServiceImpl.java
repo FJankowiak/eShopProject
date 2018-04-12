@@ -21,9 +21,9 @@ public class ProduitServiceImpl implements IProduitService {
 	private IProduitDao produitDao;
 
 	@Override
-	public Produit addProduit(Produit prod) {
-
-		return produitDao.addProduit(prod);
+	public Produit addProduit(Produit p, Categorie categorie) {
+		p.setCategorie(categorie);
+		return produitDao.addProduit(p);
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class ProduitServiceImpl implements IProduitService {
 	}
 
 	@Override
-	public int updateProduit(Produit prod) {
-	
-		return produitDao.updateProduit(prod);
+	public int updateProduit(Produit p, Categorie categorie) {
+		p.setCategorie(categorie);
+		return produitDao.updateProduit(p);
 	}
 
 	@Override

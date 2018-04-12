@@ -7,9 +7,9 @@ import fr.adaming.model.Produit;
 
 public interface IProduitService {
 	
-	// AJOUTER UN PRODUIT
+		// AJOUTER UN PRODUIT
 
-		public Produit addProduit(Produit prod);
+		public Produit addProduit(Produit prod, Categorie categorie);
 
 		// CONSULTER TOUS LES PRODUITS
 
@@ -17,7 +17,7 @@ public interface IProduitService {
 
 		// MODIIFER UN PRODUIT
 
-		public int updateProduit(Produit prod);
+		public int updateProduit(Produit prod, Categorie categorie);
 
 		// SUPPRIMER UN PRODUIT
 
