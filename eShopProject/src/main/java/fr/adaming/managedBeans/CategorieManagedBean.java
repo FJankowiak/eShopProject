@@ -59,7 +59,7 @@ public class CategorieManagedBean {
 	public String ajouterCategorie() {
 		Categorie catOut = catService.addCategorie(categorie);
 		if(catOut.getIdCategorie() != 0){
-			return "";
+			return "test";
 		} else {
 			return "";
 		}
@@ -68,7 +68,7 @@ public class CategorieManagedBean {
 	public String supprimerCategorie() {
 		int verif = catService.deleteCategorie(categorie);
 		if(verif != 0){
-			return "";
+			return "test";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur, catégorie non supprimé."));
 			return "";
@@ -78,7 +78,7 @@ public class CategorieManagedBean {
 	public String modifierCategorie() {
 		int verif = catService.updateCategorie(categorie);
 		if(verif != 0){
-		return "";
+		return "test";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur, catégorie non supprimé."));
 			return "";
@@ -88,7 +88,7 @@ public class CategorieManagedBean {
 	public String rechercherCategorie() {
 		categorie =catService.getCategorie(categorie);
 		if(categorie != null) {
-			return "";
+			return "test";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur, catégorie introuvable."));
 			return "";
@@ -98,7 +98,7 @@ public class CategorieManagedBean {
 	public String afficherToutCategorie() {
 		listeCategories = catService.getAllCategorie();
 		if(listeCategories != null) {
-			return "";
+			return "test";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur, liste des catégories introuvable."));
 			return "";
