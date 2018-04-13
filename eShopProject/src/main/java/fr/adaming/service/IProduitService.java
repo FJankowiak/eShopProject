@@ -32,5 +32,8 @@ public interface IProduitService {
 		
 		// consulter les produits d'une catégorie
 		public List<Produit> getAllProduits(Categorie categorie);
+		
+		// rechercher par mots clés
+		public List<Produit> getParMotCle(String motCle);
 
 }

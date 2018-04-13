@@ -54,6 +54,7 @@ public class ProduitManagedBeans implements Serializable {
 	HttpSession maSession;
 	private List<Produit> listeproduits;
 	private boolean indice;
+	private String motCle;
 
 	private UploadedFile uf;
 
@@ -119,15 +120,22 @@ public class ProduitManagedBeans implements Serializable {
 		this.uf = uf;
 	}
 
-
 	public IProduitService getProduitService() {
 		return produitService;
+	}
+		
+	public String getMotCle() {
+		return motCle;
+	}
+
+	public void setMotCle(String motCle) {
+		this.motCle = motCle;
 	}
 
 	// METHODES
 	
 	// méthode rechercher produits par catégorie
-	
+
 	public String rechercherByCategorie() {
 		this.cat = catService.getCategorie(cat);
 		listeproduits = produitService.getAllProduits(cat);
@@ -152,6 +160,16 @@ public class ProduitManagedBeans implements Serializable {
 				return "";
 			}
 		}
+		
+	// méthode rechercher produit par mots clés
+		public String rechercherByMotCle() {
+			List<Produit> listeRech = produitService.getParMotCle(motCle);
+
+			maSession.setAttribute("rechListe", listeRech);
+
+			return "test";
+
+			}
 	
 	// AJOUTER UN PRODUIT
 

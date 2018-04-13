@@ -90,7 +90,40 @@
 			</p:column>
 		</p:dataTable>
 	</h:form>
-	
+<br/>
+<hr/>
+<h1>Rechercher produit par mot clé</h1>
+<h:form>
+		<h:panelGrid columns="2">
+		Mot clé : <h:inputText value="#{produitMB.motCle}" />
+			<h:commandButton value="Consulter produits"
+				action="#{produitMB.rechercherByMotCle}" />
+		</h:panelGrid>
+	</h:form>
+	<br />
+	<h:form>
+		<p:dataTable var="produit" value="#{sessionScope.rechListe}">
+			<p:column headerText="Id">
+				<h:outputText value="#{produit.id}" />
+			</p:column>
+
+			<p:column headerText="designation">
+				<h:outputText value="#{produit.designation}" />
+			</p:column>
+
+			<p:column headerText="description">
+				<h:outputText value="#{produit.description}" />
+			</p:column>
+
+			<p:column headerText="quantite">
+				<h:outputText value="#{produit.quantite}" />
+			</p:column>
+
+			<p:column headerText="catégorie">
+				<h:outputText value="#{produit.categorie.idCategorie}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>	
 <br/>
 <hr/>
 <h1>Ajouter catégorie</h1>
@@ -233,7 +266,7 @@
 	</h:form>
 
 	<br />
-<h1>Rechercher produit</h1>
+<h1>Rechercher produit by Id</h1>
 <h:form>
 		<h:panelGrid columns="2">
 		Id produit : <h:inputText value="#{produitMB.produit.id}" />

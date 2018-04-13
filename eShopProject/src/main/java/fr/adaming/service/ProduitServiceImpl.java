@@ -1,5 +1,6 @@
 package fr.adaming.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,21 @@ public class ProduitServiceImpl implements IProduitService {
 	public List<Produit> getAllProduits(Categorie categorie) {
 		return produitDao.getAllProduits(categorie);
 	}
+
+	@Override
+	public List<Produit> getParMotCle(String motCle) {
+		// récupérer la liste des produits :
+		List<Produit> listePr=produitDao.getlisteProduit();
+		
+		//initialiser la liste récupérer avec les mots clés :
+		List<Produit> listeRech = new ArrayList<Produit>();
+		
+		for(Produit pr : listePr) {
+			if(pr.getDesignation().contains(motCle) || pr.getDescription().contains(motCle)) {
+			listeRech.add(pr);
+			}
+		}
+		return listeRech;
+		}
 
 }
