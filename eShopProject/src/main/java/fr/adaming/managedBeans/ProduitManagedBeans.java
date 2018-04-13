@@ -1,5 +1,6 @@
 package fr.adaming.managedBeans;
 
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,11 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.model.UploadedFile;
 
+import com.itextpdf.text.DocumentException;
+
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
+import fr.adaming.service.PDFAdmin;
+import fr.adaming.service.SendMail;
 
 @ManagedBean(name = "produitMB")
 @RequestScoped
@@ -175,6 +180,8 @@ public class ProduitManagedBeans implements Serializable {
 
 	public String ajouterProd() {
 		
+		Admin adm = (Admin) maSession.getAttribute("adminSession");
+		
 		produit.setPhoto(this.uf.getContents());
 		
 		// APPEL DE LA METHODE AJOUTER
@@ -188,6 +195,15 @@ public class ProduitManagedBeans implements Serializable {
 
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
 			this.listeproduits = produitService.getlisteProduit();
+			
+			try {
+				PDFAdmin.Enregistrement(listeproduits);
+			} catch (FileNotFoundException | DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			SendMail.sendMessage(adm.getMail());
 
 			maSession.setAttribute("listeproduits", listeproduits);
 

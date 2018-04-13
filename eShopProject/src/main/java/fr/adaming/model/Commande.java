@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 @Entity
 @Table(name="commandes")
 public class Commande {
@@ -22,7 +24,10 @@ public class Commande {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_co")
 	private Long idCommande;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dateCommande;
+	private double prix;
 	
 	// transformation uml en java
 	@ManyToOne
@@ -46,6 +51,11 @@ public class Commande {
 		this.dateCommande = dateCommande;
 	}
 	
+	public Commande(Date dateCommande, double prix) {
+		super();
+		this.dateCommande = dateCommande;
+		this.prix = prix;
+	}
 	// getters et setters
 	public Long getIdCommande() {
 		return idCommande;

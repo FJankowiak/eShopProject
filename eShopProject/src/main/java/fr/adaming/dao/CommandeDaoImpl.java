@@ -1,5 +1,7 @@
 package fr.adaming.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,6 +27,33 @@ public class CommandeDaoImpl implements ICommandeDao{
 	private Session s;
 	private Query q;
 	private String r;
+	
+	@Override
+	public Commande addCommande(Commande c, Client Cl) {
+		
+		// Ouvrir session
+		s=sf.getCurrentSession();
+		
+		s.save(c);
+		
+		return null;
+	}
+	
+	@Override
+	public List<Commande> getAllCommande(Commande c, Client Cl) {
+		
+		// requête HQL
+		r = "FROM Commande c";
+		
+		// ouvrir session
+		s= sf.getCurrentSession();
+				
+		// objet de type Query pour envoyer la requête HQL
+		q=s.createQuery(r);
+		
+		// Récup du résultat		
+		return q.list();
+	}
 
 	@Override
 	public Commande getCommandeById(Commande c, Client cl) {
@@ -82,4 +111,7 @@ public class CommandeDaoImpl implements ICommandeDao{
 		// envoyer requête
 		return q.executeUpdate();
 	}
+
+
+
 }

@@ -6,5 +6,53 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+<h:head>
+	<title>Univers | Accueil</title>
+
+	<h:outputStylesheet library="css" name="monStyle.css" />
+	<h:outputScript library="js" name="style.js" />
+</h:head>
+<h:form>
+		<p:dataScroller value="#{produitMB.listeproduits}" var="prod"
+			chunkSize="10">
+			<f:facet name="header">
+            La liste des produits
+        </f:facet>
+
+			<f:facet name="loader">
+				<p:commandButton type="button" value="...+" />
+			</f:facet>
+
+			<h:panelGrid columns="2" style="width:100%"
+				columnClasses="logo,detail">
+				<p:graphicImage name="#{prod.image}" />
+
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Id:" />
+						<h:outputText value="#{prod.id}" style="font-weight: bold" />
+
+						<h:outputText value="Designation:" />
+						<h:outputText value="#{prod.designation}"
+							style="font-weight: bold" />
+
+						<h:outputText value="Description:" />
+						<h:outputText value="#{prod.description}"
+							style="font-weight: bold" />
+
+						<h:outputText value="Prix:" />
+						<h:outputText value="#{prod.prix}" style="font-weight: bold" />
+						
+					
+
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+		</p:dataScroller>
+	</h:form>
+<p:dock position="bottom">
+		<p:menuitem value="Accueil" icon="/resources/image/disneyland-castle.png" url="accueil.xhtml" />
+
+	</p:dock>
 
 </html>

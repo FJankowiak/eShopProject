@@ -18,7 +18,7 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	private ILigneCommandeDao lcDao;
 
 	@Override
-	public int ajouterLC(LigneCommande lc) {
+	public LigneCommande ajouterLC(LigneCommande lc) {
 		
 		return lcDao.ajouterLC(lc);
 	}
@@ -35,17 +35,6 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 		return lcDao.getLigneCommande();
 	}
 
-	@Override
-	public LigneCommande isExist(LigneCommande lc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double getTotal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void viderLC(LigneCommande lc) {

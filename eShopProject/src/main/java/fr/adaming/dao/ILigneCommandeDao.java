@@ -6,7 +6,7 @@ import fr.adaming.model.LigneCommande;
 
 public interface ILigneCommandeDao {
 	
-	public int ajouterLC(LigneCommande lc);	
+	public LigneCommande ajouterLC(LigneCommande lc);	
 	
 	public int modifierLC(LigneCommande lc);
 	

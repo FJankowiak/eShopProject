@@ -25,13 +25,13 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	
 
 	@Override
-	public int ajouterLC(LigneCommande lc) {
+	public LigneCommande ajouterLC(LigneCommande lc) {
 		
 		s=sf.getCurrentSession();
 		
 		s.save(lc);
 		
-		return 0;
+		return null;
 	}
 
 
