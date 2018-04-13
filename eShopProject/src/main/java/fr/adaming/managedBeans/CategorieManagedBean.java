@@ -81,7 +81,7 @@ public class CategorieManagedBean {
 		Categorie catOut = catService.addCategorie(categorie);
 		if (catOut.getIdCategorie() != 0) {
 
-			return "test";
+			return "tabAdmin";
 		} else {
 			return "";
 		}
@@ -90,7 +90,7 @@ public class CategorieManagedBean {
 	public String supprimerCategorie() {
 		int verif = catService.deleteCategorie(categorie);
 		if (verif != 0) {
-			return "test";
+			return "tabAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur, catégorie non supprimé."));
 			return "";
@@ -101,7 +101,7 @@ public class CategorieManagedBean {
 		categorie.setPhoto(this.uf.getContents());
 		int verif = catService.updateCategorie(categorie);
 		if (verif != 0) {
-			return "test";
+			return "tabAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur, catégorie non supprimé."));
 			return "";
@@ -111,7 +111,7 @@ public class CategorieManagedBean {
 	public String rechercherCategorie() {
 		categorie = catService.getCategorie(categorie);
 		if (categorie != null) {
-			return "test";
+			return "accueil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur, catégorie introuvable."));
 			return "";
@@ -121,7 +121,7 @@ public class CategorieManagedBean {
 	public String afficherToutCategorie() {
 		listeCategories = catService.getAllCategorie();
 		if (listeCategories != null) {
-			return "test";
+			return "accueil";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Erreur, liste des catégories introuvable."));

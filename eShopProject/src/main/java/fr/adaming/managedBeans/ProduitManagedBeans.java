@@ -158,7 +158,7 @@ public class ProduitManagedBeans implements Serializable {
 		public String afficherProduits() {
 			listeproduits = produitService.getlisteProduit();
 			if (listeproduits != null) {
-				return "test";
+				return "listeproduit";
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Une erreur est survenue, liste des produits introuvable."));
@@ -170,9 +170,9 @@ public class ProduitManagedBeans implements Serializable {
 		public String rechercherByMotCle() {
 			List<Produit> listeRech = produitService.getParMotCle(motCle);
 
-			maSession.setAttribute("rechListe", listeRech);
+			maSession.setAttribute("listeproduits", listeRech);
 
-			return "test";
+			return "listeproduit";
 
 			}
 	
@@ -255,7 +255,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			this.listeproduits = listep;
 
-			return "test";
+			return "tabAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
 
@@ -274,7 +274,7 @@ public class ProduitManagedBeans implements Serializable {
 
 			this.indice = true;
 
-			return "test";
+			return "tabAdmin";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
