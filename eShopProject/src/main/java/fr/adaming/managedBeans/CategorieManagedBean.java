@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.service.ICategorieService;
 
@@ -32,6 +34,9 @@ public class CategorieManagedBean {
 
 	// attributs du managedBean
 	private Categorie categorie;
+
+	private UploadedFile uf;
+
 	private List<Categorie> listeCategories;
 
 	// constucteur vide
@@ -56,6 +61,14 @@ public class CategorieManagedBean {
 		this.listeCategories = listeCategories;
 	}
 
+	public UploadedFile getUf() {
+		return uf;
+	}
+
+	public void setUf(UploadedFile uf) {
+		this.uf = uf;
+	}
+
 	@PostConstruct
 	public void init() {
 		listeCategories = catService.getAllCategorie();
@@ -64,9 +77,10 @@ public class CategorieManagedBean {
 	// méthodes métiers
 
 	public String ajouterCategorie() {
+		categorie.setPhoto(this.uf.getContents());
 		Categorie catOut = catService.addCategorie(categorie);
 		if (catOut.getIdCategorie() != 0) {
-			
+
 			return "test";
 		} else {
 			return "";
@@ -84,6 +98,7 @@ public class CategorieManagedBean {
 	}
 
 	public String modifierCategorie() {
+		categorie.setPhoto(this.uf.getContents());
 		int verif = catService.updateCategorie(categorie);
 		if (verif != 0) {
 			return "test";

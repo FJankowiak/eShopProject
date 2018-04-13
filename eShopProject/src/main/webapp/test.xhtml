@@ -39,7 +39,7 @@
 	    </p:column>
 	 
 	    <p:column headerText="image">
-	        <h:outputText value="#{c.image}" />
+	        <h:graphicImage value="#{c.image}" />
 	    </p:column>
 
 	    <p:column headerText="description">
@@ -197,15 +197,6 @@
 	</h:form>
 
 <h1>Ajouter produit</h1>
-	<h:form>
-		<h:panelGrid columns="2">
-			Nom: <h:inputText value="#{categorieMB.categorie.nomCategorie}" />
-			Description: <h:inputText
-				value="#{categorieMB.categorie.description}" />
-			<h:commandButton value="Ajouter Catégorie"
-				action="#{categorieMB.ajouterCategorie}" />
-		</h:panelGrid>
-	</h:form>
 <h:form>
 		<h:panelGrid columns="2">
 			designation : <h:inputText value="#{produitMB.produit.designation}" />

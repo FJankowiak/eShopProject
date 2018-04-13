@@ -161,6 +161,7 @@ public class ProduitManagedBeans implements Serializable {
 		
 		// APPEL DE LA METHODE AJOUTER
 
+		cat=catService.getCategorie(cat);
 		Produit prodOut = produitService.addProduit(produit, cat);
 
 		if (prodOut.getId() != 0) {
@@ -168,10 +169,9 @@ public class ProduitManagedBeans implements Serializable {
 	
 
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
+			this.listeproduits = produitService.getlisteProduit();
 
-			List<Produit> listep = produitService.getlisteProduit();
-
-			this.listeproduits = listep;
+			maSession.setAttribute("listeproduits", listeproduits);
 
 			return "tabAdmin";
 

@@ -29,6 +29,7 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	
 	<!-- spécifier la phase du projet -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>

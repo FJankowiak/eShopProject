@@ -79,7 +79,7 @@
 	<!-- LISTE PRODUIT -->
 
 	<h:form>
-		<p:dataScroller value="#{produitMB.listeproduits}" var="prod"
+		<p:dataScroller value="#{sessionScope.listeproduits}" var="prod"
 			chunkSize="10">
 			<f:facet name="header">
             La liste des produits
@@ -91,7 +91,7 @@
 
 			<h:panelGrid columns="2" style="width:100%"
 				columnClasses="logo,detail">
-				<p:graphicImage name="#{prod.image}" />
+				<h:graphicImage value="#{prod.image}" />
 
 				<p:outputPanel>
 					<h:panelGrid columns="2" cellpadding="5">
@@ -119,7 +119,7 @@
 	<!-- LES PRODUITS -->
 
 	<!-- AJOUTER -->
-	<h:form>
+	<h:form enctype="multipart/form-data">
 		<p:dialog header="Produit | Formulaire d'ajout" widgetVar="dlg1"
 			modal="true" height="300">
 			<h:panelGrid columns="2">
@@ -148,7 +148,7 @@
 				<div>
 					Photo:
 					<p:fileUpload value="#{produitMB.uf}" mode="simple" />
-					<h:graphicImage value="#{produitMB.produit.image}" />
+					
 
 				</div>
 
@@ -158,7 +158,7 @@
 					<h:inputText value="#{produitMB.cat.idCategorie}" />
 				</div>
 
-				<p:commandButton value="Ajouter" ajax="false" action="#{produitMB.ajouterProd}" />
+				<p:commandButton value="Ajouter" ajax="false" action="#{produitMB.ajouterProd}" update="@all"/>
 
 			</h:panelGrid>
 		</p:dialog>
@@ -236,7 +236,7 @@
 	</h:form>
 
 	<!-- AJOUTER CAT-->
-	<h:form>
+	<h:form enctype="multipart/form-data">
 		<p:dialog header="Categorie |Formulaire d'ajout" widgetVar="dlg4"
 			modal="true" height="100">
 			<h:panelGrid columns="2">
@@ -255,8 +255,7 @@
 				<div>
 					Photo:
 					<p:fileUpload value="#{categorieMB.uf}" mode="simple" />
-					<h:graphicImage value="#{categorieMB.categorie.image}" />
-
+					
 				</div>
 
 				<p:commandButton value="submit" ajax="false"
@@ -267,7 +266,7 @@
 	</h:form>
 
 	<!-- MODIFIER CAT -->
-	<h:form>
+	<h:form enctype="multipart/form-data">
 		<p:dialog header="Categorie | Formulaire de modification "
 			widgetVar="dlg5" modal="true" height="100">
 			<h:panelGrid columns="2">
