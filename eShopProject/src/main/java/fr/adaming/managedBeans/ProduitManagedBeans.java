@@ -163,7 +163,7 @@ public class ProduitManagedBeans implements Serializable {
 
 		if (prodOut.getId() != 0) {
 			
-			produit.setPhoto(this.uf.getContents());
+			prodOut.setPhoto(this.uf.getContents());
 
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
 
