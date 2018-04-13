@@ -157,13 +157,15 @@ public class ProduitManagedBeans implements Serializable {
 
 	public String ajouterProd() {
 		
+		produit.setPhoto(this.uf.getContents());
+		
 		// APPEL DE LA METHODE AJOUTER
 
 		Produit prodOut = produitService.addProduit(produit, cat);
 
 		if (prodOut.getId() != 0) {
 			
-			prodOut.setPhoto(this.uf.getContents());
+	
 
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
 

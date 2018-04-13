@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Univers</title>
+	<h:outputStylesheet library="css" name="monStyle.css" />
+	<h:outputScript library="js" name="style.js" />
+</h:head>
+
+<h:body>
+
+	<h1>Bienvenue | Tableau de bord</h1>
+
+	<!--**************** RECHERCHER*************** -->
+	<h:form>
+		<div class="ui-g-12 ui-md-4">
+			<div class="ui-inputgroup">
+				<p:inputText placeholder="rechercher"
+					value="#{produitMB.produit.id}" />
+				<p:commandButton value="rechercher"
+					action="#{produitMB.rechercherProdByid}" styleClass="white-button" />
+			</div>
+		</div>
+	</h:form>
+
+	<!-- ******************FIN****************** -->
+	<h:form>
+		<p:cache region="testcache" key="toolbar">
+
+			<p:toolbar>
+
+				<p:toolbarGroup align="left">
+
+
+
+					<p:separator />
+
+					<p:menuButton type="button" value="Produit">
+						<p:menuitem value="Ajouter produit" modal="true"
+							onclick="PF('dlg1').show();" />
+						<p:menuitem value="Modifier Produit" modal="true"
+							onclick="PF('dlg2').show();" />
+						<p:menuitem value="supprimer prod" modal="true"
+							onclick="PF('dlg3').show();" />
+					</p:menuButton>
+
+					<p:separator />
+
+					<p:menuButton type="button" value="Categorie">
+						<p:menuitem value="Ajouter Categorie" modal="true"
+							onclick="PF('dlg4').show();" />
+						<p:menuitem value="Modifier categorie" modal="true"
+							onclick="PF('dlg5').show();" />
+						<p:menuitem value="supprimer categorie" modal="true"
+							onclick="PF('dlg6').show();" />
+					</p:menuButton>
+
+					<p:separator />
+
+
+				</p:toolbarGroup>
+
+
+
+			</p:toolbar>
+
+		</p:cache>
+
+	</h:form>
+
+
+
+
+	<!-- LISTE PRODUIT -->
+
+	<h:form>
+		<p:dataScroller value="#{produitMB.listeproduits}" var="prod"
+			chunkSize="10">
+			<f:facet name="header">
+            La liste des produits
+        </f:facet>
+
+			<f:facet name="loader">
+				<p:commandButton type="button" value="...+" />
+			</f:facet>
+
+			<h:panelGrid columns="2" style="width:100%"
+				columnClasses="logo,detail">
+				<p:graphicImage name="#{prod.image}" />
+
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Id:" />
+						<h:outputText value="#{prod.id}" style="font-weight: bold" />
+
+						<h:outputText value="Designation:" />
+						<h:outputText value="#{prod.designation}"
+							style="font-weight: bold" />
+
+						<h:outputText value="Description:" />
+						<h:outputText value="#{prod.description}"
+							style="font-weight: bold" />
+
+						<h:outputText value="Prix:" />
+						<h:outputText value="#{prod.prix}" style="font-weight: bold" />
+
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+		</p:dataScroller>
+	</h:form>
+
+
+	<!-- LES PRODUITS -->
+
+	<!-- AJOUTER -->
+	<h:form>
+		<p:dialog header="Produit | Formulaire d'ajout" widgetVar="dlg1"
+			modal="true" height="300">
+			<h:panelGrid columns="2">
+
+				<div class="form-group">
+					Designation:
+					<h:inputText value="#{produitMB.produit.designation}" />
+
+				</div>
+
+				<div class="form-group">
+					Description:
+					<h:inputText value="#{produitMB.produit.description}" />
+				</div>
+
+				<div class="form-group">
+					Prix:
+					<h:inputText placeholder="€" value="#{produitMB.produit.prix}" />
+				</div>
+
+				<div class="form-group">
+					Quantité:
+					<h:inputText value="#{produitMB.produit.quantite}" />
+				</div>
+
+				<div>
+					Photo:
+					<p:fileUpload value="#{produitMB.uf}" mode="simple" />
+					<h:graphicImage value="#{produitMB.produit.image}" />
+
+				</div>
+
+
+				<div class="form-group">
+					Categorie:
+					<h:inputText value="#{produitMB.cat.idCategorie}" />
+				</div>
+
+				<p:commandButton value="Ajouter" ajax="false" action="#{produitMB.ajouterProd}" />
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<!-- MODIFIER PROD -->
+	<h:form>
+		<p:dialog header="Produit | Formulaire de modification "
+			widgetVar="dlg2" modal="true" height="100">
+			<h:panelGrid columns="2">
+				<div class="form-group">
+					ID:
+					<h:inputText value="#{produitMB.produit.id}" />
+				</div>
+
+				<div class="form-group">
+					Designation:
+					<h:inputText value="#{produitMB.produit.designation}" />
+
+				</div>
+
+				<div class="form-group">
+					Description:
+					<h:inputText value="#{produitMB.produit.description}" />
+				</div>
+
+				<div class="form-group">
+					Prix:
+					<h:inputText value="#{produitMB.produit.prix}" />
+				</div>
+
+				<div class="form-group">
+					Quantité:
+					<h:inputText value="#{produitMB.produit.quantite}" />
+				</div>
+
+				<div class="form-group">
+					Categorie:
+					<h:inputText value="#{produitMB.cat.idCategorie}" />
+				</div>
+
+				<div>
+					Photo:
+					<p:fileUpload value="#{produitMB.uf}" mode="simple" />
+					<h:graphicImage value="#{produitMB.produit.image}" />
+
+				</div>
+
+
+				<p:commandButton value="submit" ajax="false"
+					action="#{produitMB.modifierProd}" />
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<!-- SUPPRIMER PROD-->
+
+	<h:form>
+		<p:dialog header="Produit | Formulaire de suppression "
+			widgetVar="dlg3" modal="true" height="100">
+			<h:panelGrid columns="2">
+
+
+				<div class="form-group">
+					ID:
+					<h:inputText value="#{produitMB.produit.id}" />
+				</div>
+
+				<p:commandButton value="submit" ajax="false"
+					action="#{produitMB.modifierProd}" />
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<!-- AJOUTER CAT-->
+	<h:form>
+		<p:dialog header="Categorie |Formulaire d'ajout" widgetVar="dlg4"
+			modal="true" height="100">
+			<h:panelGrid columns="2">
+
+				<div class="form-group">
+					Nom categorie:
+					<h:inputText value="#{categorieMB.categorie.nomCategorie}" />
+
+				</div>
+
+				<div class="form-group">
+					Description:
+					<h:inputText value="#{categorieMB.categorie.description}" />
+				</div>
+
+				<div>
+					Photo:
+					<p:fileUpload value="#{categorieMB.uf}" mode="simple" />
+					<h:graphicImage value="#{categorieMB.categorie.image}" />
+
+				</div>
+
+				<p:commandButton value="submit" ajax="false"
+					action="#{categorieMB.ajouterCategorie}" />
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<!-- MODIFIER CAT -->
+	<h:form>
+		<p:dialog header="Categorie | Formulaire de modification "
+			widgetVar="dlg5" modal="true" height="100">
+			<h:panelGrid columns="2">
+
+
+				<div class="form-group">
+					ID:
+					<h:inputText value="#{categorieMB.categorie.idCategorie}" />
+				</div>
+
+				<div class="form-group">
+					Nom Categorie:
+					<h:inputText value="#{categorieMB.categorie.nomCategorie}" />
+
+				</div>
+
+				<div class="form-group">
+					Description:
+					<h:inputText value="#{categorieMB.categorie.description}" />
+				</div>
+
+
+				<div>
+					Photo:
+					<p:fileUpload value="#{categorieMB.uf}" mode="simple" />
+					<h:graphicImage value="#{categorieMB.categorie.image}" />
+
+				</div>
+
+				<p:commandButton value="submit" ajax="false"
+					action="#{categorieMB.modifierCategorie}" />
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<!-- SUPPRIMER CAT-->
+
+	<h:form>
+		<p:dialog header="Categorie | Formulaire de suppression "
+			widgetVar="dlg6" modal="true" height="100">
+			<h:panelGrid columns="2">
+
+
+				<div class="form-group">
+					ID:
+					<h:inputText value="#{categorieMB.categorie.idCategorie}" />
+				</div>
+
+				<p:commandButton value="submit" ajax="false"
+					action="#{categorieMB.supprimerCategorie}" />
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+
+
+</h:body>
+</html>

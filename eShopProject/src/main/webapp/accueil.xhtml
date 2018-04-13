@@ -3,17 +3,89 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="">
-	<ui:define name="header">
-	    Add your header here or delete to use the default
-	</ui:define>
-	<ui:define name="content">
-	    Add your content here or delete to use the default
-	</ui:define>
-	<ui:define name="footer">
-	    Add your footer here or delete to use the default
-	</ui:define>
-</ui:composition>
+
+<h:head>
+	<title>Univers | Accueil</title>
+
+	<h:outputStylesheet library="css" name="monStyle.css" />
+	<h:outputScript library="js" name="style.js" />
+</h:head>
+
+
+
+
+<h:body>
+
+	<!-- **************************LOG ADMIN********************** -->
+
+	<p:graphicImage library="image" name="unicorn.png" styleClass="logo" />
+
+	<h:form styleClass="log">
+		<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
+			title="login">
+			<p:graphicImage library="image" name="padlock.png" styleClass="login" />
+		</h:outputLink>
+		
+	</h:form>
+	<!-- *********************FIN JS********** -->
+
+	<!--**************** RECHERCHER*************** -->
+	<h:form>
+		<div class="ui-g-12 ui-md-4">
+			<div class="ui-inputgroup">
+				<p:inputText placeholder="rechercher" />
+				<p:commandButton value="rechercher"
+					action="#{categorieMB.rechercherCategorie}"
+					styleClass="white-button" />
+			</div>
+		</div>
+	</h:form>
+
+	<!-- ******************FIN****************** -->
+
+	<!-- **************************CONTENT FLOW***************** -->
+	<h:form>
+
+		<p:contentFlow value="#{categorieMB.listeCategories}" var="cat">
+			<p:graphicImage value="#{cat.image}" styleClass="content" />
+			<div class="caption">#{cat.nomCategorie}</div>
+		</p:contentFlow>
+
+	</h:form>
+
+	<!-- *************************FIN**************** -->
+
+	<!-- ************PANIER************** -->
+	<h:form>
+		<p:panel id="pnl" header="Panier">
+			<h:outputText value="Commande" />
+		</p:panel>
+		<p:draggable for="pnl" />
+	</h:form>
+	<!-- **********FIN PANIER*************** -->
+
+	<!-- *******FORMULAIRE CONNEXION ADMIN************* -->
+	<h:form>
+		<p:dialog header="Connexion" widgetVar="dlg" modal="true" height="350"> 
+
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Mail:"/>
+				<h:inputText value="#{adminMB.admin.mail}" label="mail"/>
+
+				<h:outputLabel value="MDP:"/>
+				<p:password value="#{adminMB.admin.mdp}" label="MDP"/>
+
+				<f:facet name="footer">
+					<p:commandButton value="se Connecter"
+						action="#{adminMB.seConnecter}"/>
+
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+	<!-- **********************FIN***************** -->
+</h:body>
 </html>

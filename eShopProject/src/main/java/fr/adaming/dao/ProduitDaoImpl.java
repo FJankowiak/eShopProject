@@ -1,8 +1,10 @@
 package fr.adaming.dao;
 
-//import org.apache.commons.codec.binary.Base64;
+
+
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -138,10 +140,11 @@ public class ProduitDaoImpl implements IProduitDao {
 		// Récupération du résultat
 		List<Produit> listeOut=q.list();
 		
-//		// Chargement des images
-//		for(Produit prod: listeOut){
-//			prod.setImage("data:image/png;base64,"+Base64.encodeBase64String(prod.getPhoto()));
-//		}
+	// Chargement des images
+		for(Produit prod: listeOut){
+			prod.setImage("data:image/png;base64," + Base64.encodeBase64String(prod.getPhoto()));
+		}
+		
 		// retourner le résultat
 		return listeOut;
 	}
