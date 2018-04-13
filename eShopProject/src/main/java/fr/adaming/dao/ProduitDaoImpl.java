@@ -142,7 +142,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		
 	// Chargement des images
 		for(Produit prod: listeOut){
-			prod.setImage("data:image/png;base64," + Base64.encodeBase64String(prod.getPhoto()));
+			prod.setImage("data:image/jpg;base64," + Base64.encodeBase64String(prod.getPhoto()));
 		}
 		
 		// retourner le résultat
